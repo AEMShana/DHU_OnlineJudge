@@ -1,0 +1,70 @@
+{% load staticfiles %}
+
+<div class="container-fluid pt-2 pb-2 bg-primary text-white">
+    <div class="row">
+        <div class="col-md-8">
+            <table>
+                <tr>
+                    <td width="150"><img src="{% static 'images/logo.png' %}" height="90px" /></td>
+                    <td>
+                        <h1> DHU Online Judge</h1>
+                        <p>Developed by ACM Training Team of Donghua University</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+
+</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home:home' %}">DHUOJ</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home:home' %}">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Problem Set
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Problems</a></li>
+                        <li><a class="dropdown-item" href="#">Submit Problem</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <form class="d-flex" role="search" aria-label="go_to_problem">
+                                <input class="form-control me-1" type="search" placeholder="Prob.ID"
+                                    aria-label="Search">
+                                <button class="btn btn-outline-success" type="submit">GO</button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contests</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blog:article_list' %}">Blogs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Information</a>
+                </li>
+            </ul>
+            <form class="d-flex" role="search" aria-label="search_info">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>

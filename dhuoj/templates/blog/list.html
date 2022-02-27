@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block content %}
+<style type="text/css">
+    a {
+        text-decoration: none
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                <div class="card-header py-3 text-white bg-primary border-primary">
+                    <h4 class="my-0 fw-normal">Blog</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li>
+                            <a href="#" class="nav-link link-dark">
+                                <svg class="bi pe-none me-2" width="16" height="16">
+                                    <use xlink:href="#speedometer2"></use>
+                                </svg>
+                                All
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link link-dark">
+                                <svg class="bi pe-none me-2" width="16" height="16">
+                                    <use xlink:href="#speedometer2"></use>
+                                </svg>
+                                Self
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link link-dark">
+                                <svg class="bi pe-none me-2" width="16" height="16">
+                                    <use xlink:href="#table"></use>
+                                </svg>
+                                Top rated
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                <div class="card-header py-3 text-white bg-primary border-primary">
+                    <h4 class="my-0 fw-normal">Filter</h4>
+                </div>
+                <div class="card-body">
+                    <form class="needs-validation" novalidate="">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="ID" class="form-label">ID</label>
+                                <input type="text" class="form-control" id="ID" placeholder="" value="" required="">
+                                <div class="invalid-feedback">
+                                    Valid ID is required.
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="username" class="form-label">Username</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" class="form-control" id="username" placeholder="Username"
+                                        required="">
+                                    <div class="invalid-feedback">
+                                        Your username is required.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="problem" class="form-label">Problem ID</label>
+                                <input type="text" class="form-control" id="problem" placeholder="Problem ID" value=""
+                                    required="">
+                                <div class="invalid-feedback">
+                                    Valid problem ID is required.
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="knowledge" class="form-label">Knowledge</label>
+                                <input type="text" class="form-control" id="knowledge" placeholder="Knowledge" value=""
+                                    required="">
+                                <div class="invalid-feedback">
+                                    Valid knowledge is required.
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="page" class="form-label">Page</label>
+                                <input type="text" class="form-control" id="page" placeholder="Page" value=""
+                                    required="">
+                                <div class="invalid-feedback">
+                                    Valid page is required.
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="page" class="form-label">Records</label>
+                                <input type="text" class="form-control" id="records" placeholder="Records" value=""
+                                    required="">
+                                <div class="invalid-feedback">
+                                    Valid records is required.
+                                </div>
+                            </div>
+
+                        </div>
+                        <hr class="my-4">
+
+                        <button class="w-100 btn btn-primary btn-lg" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-9">
+            <ol class="list-group list-group-numbered">
+                {% for article in articles %}
+
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">
+                            <a href="{% url 'blog:article_detail' article.id %}">
+                                {{ article.title}}
+                            </a>
+                        </div>
+                        {{ article.body|slice:'150' }}
+                    </div>
+                    <span class="badge bg-primary rounded-pill">{{article.created}}</span>
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+</div>
+{% endblock content %}
