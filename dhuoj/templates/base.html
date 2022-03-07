@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -17,6 +17,15 @@
 
     <script>
         window.MathJax = {
+            tex: {
+                inlineMath: [["\\(", "\\)"]],
+                displayMath: [["\\[", "\\]"]],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            "HTML-CSS": {
+                linebreaks: { automatic: true, width: "container" }
+            },
             options: {
                 ignoreHtmlClass: 'tex2jax_ignore',
                 processHtmlClass: 'tex2jax_process',

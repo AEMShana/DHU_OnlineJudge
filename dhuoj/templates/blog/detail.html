@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load staticfiles %}
+{% load static %}
 
 
 {% block content %}
@@ -11,6 +11,7 @@
             <h1 class="col-12 mt-4 mb-4">{{ article.title }}</h1>
             <div class="col-12 alert alert-success">Author: {{ article.author }}
                 <a href="#" onclick="confirm_safe_delete()">删除文章</a>
+                <a href="{% url 'blog:article_update' article.id %}">编辑文章</a>
                 <form style="display:none;" id="safe_delete" action="{% url 'blog:article_safe_delete' article.id %}"
                     method="POST">
                     {% csrf_token %}

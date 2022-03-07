@@ -8,4 +8,6 @@ urlpatterns = [
     path('article-create/', views.article_create, name='article_create'),
     path('article-safe-delete/<int:id>/',
          views.article_safe_delete, name='article_safe_delete'),
+    path('article-update/<int:id>/',
+         views.article_update, name='article_update'),
 ]
