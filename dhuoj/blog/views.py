@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-
+from django.contrib.auth.decorators import login_required
 from .forms import ArticlePostForm
 from .models import ArticlePost
 from django.contrib.auth.models import User

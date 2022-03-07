@@ -21,4 +21,5 @@ urlpatterns = [
     path('blog/', include('blog.urls', namespace='blog')),
     path('', include('home.urls', namespace='home')),
     path('userprofile/', include('userprofile.urls', namespace='userprofile')),
+    path('problemset/', include('problemset.urls', namespace='problemset')),
 ]

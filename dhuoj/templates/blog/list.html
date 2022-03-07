@@ -136,7 +136,7 @@
                         </div>
                         {{ article.body|slice:'150' }}
                     </div>
-                    <span class="badge bg-primary rounded-pill">{{article.created}}</span>
+                    <span class="badge bg-primary rounded-pill">{{article.created|date:"Y/m/d"}}</span>
                 </li>
                 {% endfor %}
             </ol>

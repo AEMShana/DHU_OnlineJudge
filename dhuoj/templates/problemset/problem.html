@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="container-fluid col-md-8 col-sm-10">
+        <br>
+        <h1>{{ problem_detail.problemID }}-{{ problem_detail.title }}</h1>
+        <hr>
+        {% if problem_detail.problem_background|safe %}
+        <h2>Background</h2>
+        <p>{{ problem_detail.problem_background|safe }}</p>
+        {% endif %}
+        <h2>Description</h2>
+        <p>{{ problem_detail.problem_description|safe }}</p>
+        <h2>Input</h2>
+        <p>{{ problem_detail.problem_input|safe }}</p>
+        <h2>Output</h2>
+        <p>{{ problem_detail.problem_output|safe }}</p>
+        <h2>Examples</h2>
+        {% for example in example_list %}
+        <div class="card bg-light">
+            <div class="card-body pt-2 pb-2 ">
+                <h5 class="card-title ">input</h5>
+                <hr>
+                <p class="card-text">
+                    {{example.input_example|safe}}
+                </p>
+            </div>
+            <div class="card-body  pt-2 pb-2">
+                <h5 class="card-title">output</h5>
+                <hr>
+                <p class="card-text">
+                    {{example.output_example|safe}}
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+        <h2>Source</h2>
+        <p>{{problem_detail.problem_source|safe}}</p>
+    </div>
+</div>
+
+{% endblock content %}
