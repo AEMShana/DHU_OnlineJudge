@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+<div class="row">
+    <div class="container-fluid col-md-8 col-sm-10">
+        <br>
+        <h1>Problem List</h1>
+        <hr>
+
+        {% for problem in problem_info %}
+        <ul class="list-group list-group-horizontal">
+            <li class="list-group-item col-md-1">
+                <a href="{% url 'problemset:problem' problem.problemID %}"
+                    style="text-decoration: none;color: black;font-size:medium;">
+                    {{problem.problemID}}
+                </a>
+            </li>
+            <li class="list-group-item col-md-6">
+                <a href="{% url 'problemset:problem' problem.problemID %}"
+                    style="text-decoration: none;color: black;font-size: medium;">
+                    {{problem.title}}</a>
+            </li>
+            <li class="list-group-item col-md-4">A third item</li>
+            <li class="list-group-item col-md-1">
+                <div class="fw-bold">{{problem.difficulty}}</div>
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

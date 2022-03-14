@@ -14,6 +14,9 @@ class Problem(models.Model):
     problem_difficulty = models.IntegerField()  # 题目难度
     problem_source = models.CharField(max_length=100)  # 题目来源
 
+    def __str__(self):
+        return self.problemID + ' ' + self.title
+
 
 class ProblemExample(models.Model):
     problem = models.ForeignKey(Problem, on_delete=models.CASCADE)

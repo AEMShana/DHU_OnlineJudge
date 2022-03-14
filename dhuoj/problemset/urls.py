@@ -5,4 +5,5 @@ app_name = 'problemset'
 
 urlpatterns = [
     path('problem/<problem_id>', views.problem, name='problem'),
+    path('', views.problemlist, name='problemlist'),
 ]

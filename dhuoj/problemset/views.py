@@ -13,6 +13,17 @@ def render_markdown(text):
                              )
 
 
+def problemlist(request):
+    problems = Problem.objects.all()[:50]
+    problem_info = []
+    for problem in problems:
+        problem_info.append({'problemID': problem.problemID, 'title': problem.title,
+                            'difficulty': problem.problem_difficulty})
+
+    context = {'problem_info': problem_info}
+    return render(request, 'problemset/problemlist.html', context)
+
+
 def problem(request, problem_id):
     problem_detail = Problem.objects.get(problemID=problem_id)
     example_list = ProblemExample.objects.filter(problem=problem_detail)
