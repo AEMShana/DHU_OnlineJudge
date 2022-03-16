@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import Http404
 from .models import Problem, ProblemExample
 import markdown
 
@@ -25,8 +26,14 @@ def problemlist(request):
 
 
 def problem(request, problem_id):
-    problem_detail = Problem.objects.get(problemID=problem_id)
-    example_list = ProblemExample.objects.filter(problem=problem_detail)
+    try:
+        problem_detail = Problem.objects.get(problemID=problem_id)
+    except Problem.DoesNotExist:
+        raise Http404('题目不存在！')
+    try:
+        example_list = ProblemExample.objects.filter(problem=problem_detail)
+    except ProblemExample.DoesNotExist:
+        raise Http404('题目不存在！')
 
     for example in example_list:
         example.input_example = render_markdown(

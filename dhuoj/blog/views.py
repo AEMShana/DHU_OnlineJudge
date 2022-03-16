@@ -1,3 +1,4 @@
+from cmath import log
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -5,6 +6,7 @@ from .forms import ArticlePostForm
 from .models import ArticlePost
 from django.contrib.auth.models import User
 import markdown
+from .models import ArticleColumn
 
 
 def article_list(request):
@@ -25,37 +27,49 @@ def article_detail(request, id):
     context = {'article': article}
     return render(request, 'blog/detail.html', context)
 
-
+# 写文章的视图
+@login_required(login_url='/userprofile/login/')
 def article_create(request):
     if request.method == "POST":
         article_post_form = ArticlePostForm(data=request.POST)
         if article_post_form.is_valid():
             new_article = article_post_form.save(commit=False)
-            new_article.author = User.objects.get(id=1)
+            new_article.author = User.objects.get(username=request.user.username)
+            if request.POST['column'] != 'none':
+                new_article.column = ArticleColumn.objects.get(id=request.POST['column'])
             new_article.save()
             return redirect("blog:article_list")
         else:
             return HttpResponse("input invalid !")
     else:
         article_post_form = ArticlePostForm()
-        context = {'article_post_form': article_post_form}
+        columns = ArticleColumn.objects.all()
+        context = {'article_post_form': article_post_form, 'columns': columns}
         return render(request, 'blog/create.html', context)
 
-
+@login_required(login_url='/userprofile/login/')
 def article_safe_delete(request, id):
     if request.method == 'POST':
         article = ArticlePost.objects.get(id=id)
-        article.delete()
-        return redirect("blog:article_list")
+        # 验证当前用户与文章作者是否相同
+        if request.user == article.author:
+            article.delete()
+            return redirect("blog:article_list")
+        else:
+            return HttpResponse("不能删除其他用户的文章。")
     else:
-        return HttpResponse('仅允许post请求')
+        return HttpResponse("仅接受POST请求。")
 
-
+# 更新文章的视图
+@login_required(login_url='/userprofile/login/')
 def article_update(request, id):
     # 获取需要修改的具体文章对象
     article = ArticlePost.objects.get(id=id)
+    # 验证当前用户与文章作者是否相同
+    if request.user != article.author:
+        return HttpResponse("不能修改其他用户的文章。")
     # 判断用户是否为 POST 提交表单数据
-    if request.method == "POST":
+    elif request.method == "POST":
         # 将提交的数据赋值到表单实例中
         article_post_form = ArticlePostForm(data=request.POST)
         # 判断提交的数据是否满足模型的要求
@@ -63,6 +77,10 @@ def article_update(request, id):
             # 保存新写入的 title、body 数据并保存
             article.title = request.POST['title']
             article.body = request.POST['body']
+            if request.POST['column'] != 'none':
+                article.column = ArticleColumn.objects.get(id=request.POST['column'])
+            else:
+                article.column = None
             article.save()
             # 完成后返回到修改后的文章中。需传入文章的 id 值
             return redirect("blog:article_detail", id=id)
@@ -74,7 +92,8 @@ def article_update(request, id):
     else:
         # 创建表单类实例
         article_post_form = ArticlePostForm()
+        columns = ArticleColumn.objects.all()
         # 赋值上下文，将 article 文章对象也传递进去，以便提取旧的内容
-        context = {'article': article, 'article_post_form': article_post_form}
+        context = {'article': article, 'article_post_form': article_post_form, 'columns': columns,}
         # 将响应返回到模板中
         return render(request, 'blog/update.html', context)

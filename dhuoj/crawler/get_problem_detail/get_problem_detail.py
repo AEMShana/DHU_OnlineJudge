@@ -4,8 +4,8 @@ import bs4
 from bs4 import BeautifulSoup
 
 # 题目属性
-problemSet = "1651"
-problemId = "F"
+problemSet = "1600"
+problemId = "A"
 
 # 题目链接
 url = f"https://codeforces.com/problemset/problem/{problemSet}/{problemId}"
