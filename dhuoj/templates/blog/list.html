@@ -124,14 +124,14 @@
 
         </div>
         <div class="col-md-9">
-            <ol class="list-group list-group-numbered">
-                {% for article in articles %}                
+            <ul class="list-group">
+                {% for article in articles %}
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <!-- 标签 -->
                     {% if article.column %}
-                        <button type="button" class="btn btn-sm mb-2" style="color: white;background-color: black">
-                            {{ article.column }}
-                        </button>
+                    <button type="button" class="btn btn-sm mb-2" style="color: white;background-color: black">
+                        {{ article.column }}
+                    </button>
                     {% endif %}
 
                     <div class="ms-2 me-auto">
@@ -145,7 +145,7 @@
                     <span class="badge bg-primary rounded-pill">{{article.created|date:"Y/m/d"}}</span>
                 </li>
                 {% endfor %}
-            </ol>
+            </ul>
         </div>
     </div>
 </div>

@@ -28,15 +28,18 @@ def article_detail(request, id):
     return render(request, 'blog/detail.html', context)
 
 # 写文章的视图
+
+
 @login_required(login_url='/userprofile/login/')
 def article_create(request):
     if request.method == "POST":
         article_post_form = ArticlePostForm(data=request.POST)
         if article_post_form.is_valid():
             new_article = article_post_form.save(commit=False)
-            new_article.author = User.objects.get(username=request.user.username)
+            new_article.author = User.objects.get(id=request.user.id)
             if request.POST['column'] != 'none':
-                new_article.column = ArticleColumn.objects.get(id=request.POST['column'])
+                new_article.column = ArticleColumn.objects.get(
+                    id=request.POST['column'])
             new_article.save()
             return redirect("blog:article_list")
         else:
@@ -47,12 +50,13 @@ def article_create(request):
         context = {'article_post_form': article_post_form, 'columns': columns}
         return render(request, 'blog/create.html', context)
 
+
 @login_required(login_url='/userprofile/login/')
 def article_safe_delete(request, id):
     if request.method == 'POST':
         article = ArticlePost.objects.get(id=id)
         # 验证当前用户与文章作者是否相同
-        if request.user == article.author:
+        if request.user.id == article.author.id:
             article.delete()
             return redirect("blog:article_list")
         else:
@@ -61,12 +65,14 @@ def article_safe_delete(request, id):
         return HttpResponse("仅接受POST请求。")
 
 # 更新文章的视图
+
+
 @login_required(login_url='/userprofile/login/')
 def article_update(request, id):
     # 获取需要修改的具体文章对象
     article = ArticlePost.objects.get(id=id)
     # 验证当前用户与文章作者是否相同
-    if request.user != article.author:
+    if request.user.id != article.author.id:
         return HttpResponse("不能修改其他用户的文章。")
     # 判断用户是否为 POST 提交表单数据
     elif request.method == "POST":
@@ -78,7 +84,8 @@ def article_update(request, id):
             article.title = request.POST['title']
             article.body = request.POST['body']
             if request.POST['column'] != 'none':
-                article.column = ArticleColumn.objects.get(id=request.POST['column'])
+                article.column = ArticleColumn.objects.get(
+                    id=request.POST['column'])
             else:
                 article.column = None
             article.save()
@@ -94,6 +101,7 @@ def article_update(request, id):
         article_post_form = ArticlePostForm()
         columns = ArticleColumn.objects.all()
         # 赋值上下文，将 article 文章对象也传递进去，以便提取旧的内容
-        context = {'article': article, 'article_post_form': article_post_form, 'columns': columns,}
+        context = {'article': article,
+                   'article_post_form': article_post_form, 'columns': columns, }
         # 将响应返回到模板中
         return render(request, 'blog/update.html', context)

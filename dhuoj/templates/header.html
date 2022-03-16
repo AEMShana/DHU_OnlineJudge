@@ -75,8 +75,8 @@
                         {{ user.username }}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">个人信息</a></li>
-                        <li><a class="dropdown-item" href='{% url "userprofile:logout" %}' style="color:#F00">退出登录</a>
+                        <li><a class="dropdown-item" href="{% url 'userprofile:profile' user.id %}">个人信息</a></li>
+                        <li><a class="dropdown-item" href=' {% url "userprofile:logout" %}' style="color:#F00">退出登录</a>
                         </li>
                     </ul>
                 </li>
