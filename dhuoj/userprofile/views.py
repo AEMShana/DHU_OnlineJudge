@@ -94,7 +94,7 @@ def profile_edit(request, id):
         if request.user != user:
             return HttpResponse("你没有权限修改此用户信息。")
 
-        profile_form = ProfileForm(data=request.POST)
+        profile_form = ProfileForm(request.POST, request.FILES)
         if profile_form.is_valid():
             # 取得清洗后的合法数据
             profile_cd = profile_form.cleaned_data
@@ -102,6 +102,9 @@ def profile_edit(request, id):
             profile.bio = profile_cd['bio']
             profile.email = profile_cd['email']
             profile.major = profile_cd['major']
+            # 如果 request.FILES 存在文件，则保存
+            if 'photo' in request.FILES:
+                profile.photo = profile_cd["photo"]
             profile.save()
             # 带参数的 redirect()
             return redirect("userprofile:edit", id=id)
