@@ -124,6 +124,14 @@
 
         </div>
         <div class="col-md-9">
+            <form class="form-inline">
+                <input type="text"
+                    class="form-control mb-2 mr-sm-2"
+                    name="search"
+                    placeholder="搜索文章..."
+                    required
+                >
+            </form>
             <ul class="list-group">
                 {% for article in articles %}
                 <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -148,5 +156,14 @@
             </ul>
         </div>
     </div>
+    {% if search %}
+        {% if articles %}
+            <h4><span style="color: red">"{{ search }}"</span>的搜索结果如下：</h4>
+            <hr>
+        {% else %}
+            <h4>暂无<span style="color: red">"{{ search }}"</span>有关的文章。</h4>    
+            <hr>
+        {% endif %}
+    {% endif %}
 </div>
 {% endblock content %}
