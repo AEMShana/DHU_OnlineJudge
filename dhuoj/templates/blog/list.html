@@ -147,6 +147,12 @@
                             <a href="{% url 'blog:article_detail' article.id %}">
                                 {{ article.title}}
                             </a>
+                            <!-- 显示浏览量 -->
+                            <span>
+                                <small class="col align-self-end" style="color: gray;">
+                                    浏览: {{ article.total_views }}
+                                </small>
+                            </span>
                         </div>
                         {{ article.body|slice:'150' }}
                     </div>

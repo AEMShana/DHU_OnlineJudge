@@ -21,6 +21,7 @@ class ArticlePost(models.Model):
     body = models.TextField()
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
+    total_views = models.PositiveIntegerField(default=0)
     # 文章栏目的 “一对多” 外键
     column = models.ForeignKey(
         ArticleColumn,
