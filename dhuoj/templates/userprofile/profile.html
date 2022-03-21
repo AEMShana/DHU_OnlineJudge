@@ -1,25 +1,41 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <br>
-            <h1>个人信息</h1>
-            <hr>
-            {% if profile.photo %}
-            <div class="col-md-4">头像</div>
-            <img src="{{ profile.photo.url }}" style="max-width: 20%; border-radius: 100%;" class="col-md-4">
-            {% else %}
-            <h5 class="col-md-4">暂无头像</h5>
-            {% endif %}
-            <br>
-            <div class="col-md-4">用户名: {{ user.username }}</div>
-            <br>
-            <div class="col-md-4">{{ profile.major }}</div>
-            <div class="col-md-4">电子邮箱: {{ profile.email }}</div>
-            <a href="{% url 'userprofile:edit' user.id %}">修改个人信息</a>
+<div class="row" style="background-color: rgb(239, 239, 239);">
+    <div class="container-fluid col-md-10" style="background-color: white;">
+        <br>
+        <div class="row">
+            <div class="col-5">
+                <div class="card" style="width: 18rem;">
+                    {% if profile.photo %}
+                    <img src="{{ profile.photo.url }}" class="card-img" style="max-width: 100%; border-radius: 100%;">
+                    {% else %}
+                    <h5>暂无头像</h5>
+                    {% endif %}
+                    <div class="card-body">
+                        <div class="card-title"><strong style="font-size:xx-large;">{{ user.username }}</strong></div>
+                        <div class="card-subtitle  mb-2 text-muted">
+                            {{ profile.major }}
+                        </div>
+                        <div class="card-text">{{ profile.email }}</div>
+                        <br>
+                        <a href="{% url 'userprofile:edit' user.id %}" class="btn btn-primary">修改信息</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-7">
+                {% if profile.bio %}
+                {{ profile.bio }}
+                {% else %}
+                暂无简介
+                {% endif %}
+
+            </div>
         </div>
+        <div class="container-fluid pt-2 pb-2">
+            <img src="{% static 'images/hotmap.png' %}" width="100%" />
+        </div>
+        <a href="{% url 'userprofile:edit' user.id %}">修改个人信息</a>
     </div>
 </div>
 {% endblock content %}

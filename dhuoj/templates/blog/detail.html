@@ -11,10 +11,10 @@
             <!-- 标题 -->
             <h1 class="col-12 mt-4 mb-4">{{ article.title }}</h1>
             <!-- 作者 -->
-            <div class="col-12 alert alert-success">Author: {{ article.author }}
+            <div class="col-12 alert alert-success">作者: {{ article.author }}
                 {% if user == article.author %}
-                    <a href="#" onclick="confirm_safe_delete()">删除文章</a>
-                    <a href="{% url 'blog:article_update' article.id %}">编辑文章</a>
+                <a href="#" onclick="confirm_safe_delete()">删除文章</a>
+                <a href="{% url 'blog:article_update' article.id %}">编辑文章</a>
                 {% endif %}
                 <div>
                     浏览：{{ article.total_views }}
@@ -32,39 +32,31 @@
             <!-- 发送评论 -->
             <hr>
             {% if user.is_authenticated %}
-                <div>
-                    <form 
-                        action="{% url 'comment:post_comment' article.id %}" 
-                        method="POST"
-                    >
+            <div>
+                <form action="{% url 'comment:post_comment' article.id %}" method="POST">
                     {% csrf_token %}
-                        <div class="form-group">
-                            <label for="body">
-                                <strong>
-                                    我也要发言：
-                                </strong>
-                            </label>
-                            <textarea 
-                                type="text" 
-                                class="form-control" 
-                                id="body" 
-                                name="body" 
-                                rows="2"></textarea>
-                        </div>
-                        <!-- 提交按钮 -->
-                        <button type="submit" class="btn btn-primary ">发送</button>                    
-                    </form>
-                </div>
-                <br>
+                    <div class="form-group">
+                        <label for="body">
+                            <strong>
+                                我也要发言：
+                            </strong>
+                        </label>
+                        <textarea type="text" class="form-control" id="body" name="body" rows="2"></textarea>
+                    </div>
+                    <!-- 提交按钮 -->
+                    <button type="submit" class="btn btn-primary ">发送</button>
+                </form>
+            </div>
+            <br>
             {% else %}
-                <br>
-                <h5 class="row justify-content-center">
-                    请<a href="{% url 'userprofile:login' %}">登录</a>后回复
-                </h5>
-                <br>
+            <br>
+            <h5 class="row justify-content-center">
+                请<a href="{% url 'userprofile:login' %}">登录</a>后回复
+            </h5>
+            <br>
             {% endif %}
             <!-- 显示评论 -->
-            <h4>共有{{ comments.count }}条评论</h4>
+            <p>共有{{ comments.count }}条评论</p>
             <div>
                 {% for comment in comments %}
 
@@ -78,11 +70,11 @@
                         </strong>
                     </div>
                     <div class="card-body">
-                      <blockquote class="blockquote mb-0">
-                        <pre style="font-family: inherit; font-size: 1em;">{{ comment.body|safe }}</pre>
-                      </blockquote>
+                        <blockquote class="blockquote mb-0">
+                            <pre style="font-family: inherit; font-size: 1em;">{{ comment.body|safe }}</pre>
+                        </blockquote>
                     </div>
-                  </div>
+                </div>
 
 
                 {% endfor %}
