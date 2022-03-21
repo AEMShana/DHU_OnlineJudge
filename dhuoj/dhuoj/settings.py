@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'home',
     'userprofile',
     'problemset',
+    'comment',
 ]
 
 MIDDLEWARE = [

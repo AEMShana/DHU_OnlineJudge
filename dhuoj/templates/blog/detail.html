@@ -8,7 +8,9 @@
 
     <div class="container-fluid col-md-8 col-sm-10">
         <div class="row">
+            <!-- 标题 -->
             <h1 class="col-12 mt-4 mb-4">{{ article.title }}</h1>
+            <!-- 作者 -->
             <div class="col-12 alert alert-success">Author: {{ article.author }}
                 {% if user == article.author %}
                     <a href="#" onclick="confirm_safe_delete()">删除文章</a>
@@ -23,9 +25,67 @@
                     <button type="submit">发送</button>
                 </form>
             </div>
-
+            <!-- 正文 -->
             <div class="col-12">
                 <p>{{ article.body|safe }}</p>
+            </div>
+            <!-- 发送评论 -->
+            <hr>
+            {% if user.is_authenticated %}
+                <div>
+                    <form 
+                        action="{% url 'comment:post_comment' article.id %}" 
+                        method="POST"
+                    >
+                    {% csrf_token %}
+                        <div class="form-group">
+                            <label for="body">
+                                <strong>
+                                    我也要发言：
+                                </strong>
+                            </label>
+                            <textarea 
+                                type="text" 
+                                class="form-control" 
+                                id="body" 
+                                name="body" 
+                                rows="2"></textarea>
+                        </div>
+                        <!-- 提交按钮 -->
+                        <button type="submit" class="btn btn-primary ">发送</button>                    
+                    </form>
+                </div>
+                <br>
+            {% else %}
+                <br>
+                <h5 class="row justify-content-center">
+                    请<a href="{% url 'userprofile:login' %}">登录</a>后回复
+                </h5>
+                <br>
+            {% endif %}
+            <!-- 显示评论 -->
+            <h4>共有{{ comments.count }}条评论</h4>
+            <div>
+                {% for comment in comments %}
+
+                <div class="card">
+                    <div class="card-header">
+                        <strong style="color: rgba(166, 164, 168, 0.76)">
+                            <a href="{% url 'userprofile:profile' comment.user.id %}" style="text-decoration: none;">
+                                {{comment.user}}
+                            </a>
+                            {{ comment.created|date:"Y-m-d H:i:s" }}
+                        </strong>
+                    </div>
+                    <div class="card-body">
+                      <blockquote class="blockquote mb-0">
+                        <pre style="font-family: inherit; font-size: 1em;">{{ comment.body|safe }}</pre>
+                      </blockquote>
+                    </div>
+                  </div>
+
+
+                {% endfor %}
             </div>
         </div>
     </div>

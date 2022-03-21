@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 import markdown
 from .models import ArticleColumn
 from django.db.models import Q
+from comment.models import Comment
 
 
 def article_list(request):
@@ -27,6 +28,8 @@ def article_list(request):
 
 def article_detail(request, id):
     article = ArticlePost.objects.get(id=id)
+     # 取出文章评论
+    comments = Comment.objects.filter(article=id)
     article.total_views += 1
     article.save(update_fields=['total_views'])
     article.body = markdown.markdown(article.body,
@@ -36,7 +39,7 @@ def article_detail(request, id):
                                          'pymdownx.arithmatex',
                                      ]
                                      )
-    context = {'article': article}
+    context = {'article': article, 'comments': comments}
     return render(request, 'blog/detail.html', context)
 
 # 写文章的视图
