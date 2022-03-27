@@ -41,7 +41,10 @@
                                 我也要发言：
                             </strong>
                         </label>
-                        <textarea type="text" class="form-control" id="body" name="body" rows="2"></textarea>
+                        <div>
+                            {{ comment_form.media }}
+                            {{ comment_form.body }}
+                        </div>
                     </div>
                     <!-- 提交按钮 -->
                     <button type="submit" class="btn btn-primary ">发送</button>
@@ -56,6 +59,31 @@
             <br>
             {% endif %}
             <!-- 显示评论 -->
+            <!-- <p>共有{{ comments.count }}条评论</p>
+            <div>
+                {% for comment in comments %}
+
+                <div class="card">
+                    <div class="card-header">
+                        <strong style="color: rgba(166, 164, 168, 0.76)">
+                            <a href="{% url 'userprofile:profile' comment.user.id %}" style="text-decoration: none;">
+                                {{comment.user}}
+                            </a>
+                            {{ comment.created|date:"Y-m-d H:i:s" }}
+                        </strong>
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <pre style="font-family: inherit; font-size: 1em;">
+                                {{ comment.body|safe }}
+                            </pre>
+                        </blockquote>
+                    </div>
+                </div>
+
+
+                {% endfor %}
+            </div> -->
             {% load mptt_tags %}
             <h4>共有{{ comments.count }}条评论</h4>
             <div class="row">
@@ -74,24 +102,24 @@
                                 <strong style="color: pink">
                                     {{ comment.user }}
                                 </strong> 
-
+            
                                 {% if comment.reply_to %}
                                     <i class="far fa-arrow-alt-circle-right" 
-                                    style="color: cornflowerblue;"
+                                       style="color: cornflowerblue;"
                                     ></i>
                                     <strong style="color: pink">
                                         {{ comment.reply_to }}
                                     </strong> 
                                 {% endif %}
-
+            
                             </p>
                             <div>{{ comment.body|safe }}</div>
-
+            
                             <div>
                                 <span style="color: gray">
                                     {{ comment.created|date:"Y-m-d H:i" }}
                                 </span>
-
+            
                                 <!-- 加载 modal 的按钮 -->
                                 {% if user.is_authenticated %}
                                 <button type="button" 
@@ -102,20 +130,20 @@
                                 </button>
                                 {% else %}
                                 <a class="btn btn-light btn-sm text-muted" 
-                                href="{% url 'userprofile:login' %}"
-                                >
+                                   href="{% url 'userprofile:login' %}"
+                                   >
                                     回复
                                 </a>
                                 {% endif %}
                             </div>
-
+            
                             <!-- Modal -->
                             <div class="modal fade" 
-                                id="comment_{{ comment.id }}" 
-                                tabindex="-1" 
-                                role="dialog" 
-                                aria-labelledby="CommentModalCenter" 
-                                aria-hidden="true"
+                                 id="comment_{{ comment.id }}" 
+                                 tabindex="-1" 
+                                 role="dialog" 
+                                 aria-labelledby="CommentModalCenter" 
+                                 aria-hidden="true"
                             >
                                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                     <div class="modal-content" style="height: 480px">
@@ -124,45 +152,21 @@
                                         </div>
                                         <div class="modal-body" id="modal_body_{{ comment.id }}"></div>
                                     </div>
-
+            
                                 </div>
                             </div>
-
+            
                             {% if not comment.is_leaf_node %}
                                 <div class="children">
                                     {{ children }}
                                 </div>
                             {% endif %}
                         </div>
-
-
+            
+            
                     {% endwith %}
                 {% endrecursetree %}
             </div>
-            
-            <!-- <p>共有{{ comments.count }}条评论</p>
-            <div>
-                {% for comment in comments %}
-
-                <div class="card">
-                    <div class="card-header">
-                        <strong style="color: rgba(166, 164, 168, 0.76)">
-                            <a href="{% url 'userprofile:profile' comment.user.id %}" style="text-decoration: none;">
-                                {{comment.user}}
-                            </a>
-                            {{ comment.created|date:"Y-m-d H:i:s" }}
-                        </strong>
-                    </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                            <pre style="font-family: inherit; font-size: 1em;">{{ comment.body|safe }}</pre>
-                        </blockquote>
-                    </div>
-                </div>
-
-
-                {% endfor %}
-            </div> -->
         </div>
     </div>
 </div>
