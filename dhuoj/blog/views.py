@@ -9,6 +9,7 @@ import markdown
 from .models import ArticleColumn
 from django.db.models import Q
 from comment.models import Comment
+from comment.forms import CommentForm
 
 
 def article_list(request):
@@ -39,7 +40,11 @@ def article_detail(request, id):
                                          'pymdownx.arithmatex',
                                      ]
                                      )
-    context = {'article': article, 'comments': comments}
+    comment_form = CommentForm()
+    context = {'article': article,
+        'comments': comments, 
+        'comment_form': comment_form,
+    }
     return render(request, 'blog/detail.html', context)
 
 # 写文章的视图
