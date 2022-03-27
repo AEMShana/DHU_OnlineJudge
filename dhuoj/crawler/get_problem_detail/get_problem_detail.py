@@ -4,8 +4,8 @@ import bs4
 from bs4 import BeautifulSoup
 
 # 题目属性
-problemSet = "1619"
-problemId = "H"
+problemSet = "1591"
+problemId = "F"
 
 # 题目链接
 url = f"https://codeforces.com/problemset/problem/{problemSet}/{problemId}"
@@ -39,7 +39,7 @@ def divTextProcess(div):
     """
     strBuffer = ''
     # 遍历处理每个<p>标签
-    for each in div.find_all("p"):
+    for each in div.find_all(["p", "li"]):
         for content in each.contents:
             # 如果不是第一个，加换行符
             if (strBuffer != ''):
