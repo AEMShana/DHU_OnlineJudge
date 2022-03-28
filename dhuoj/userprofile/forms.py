@@ -22,6 +22,7 @@ class UserRegisterForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'email')
+        # fields = ('username', 'email')
 
     # 对两次输入的密码是否一致进行检查
     def clean_password2(self):
