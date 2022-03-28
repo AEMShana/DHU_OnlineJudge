@@ -67,10 +67,10 @@ def profile(request, id):
     except User.DoesNotExist:
         raise Http404("用户不存在!")
 
-    try:
-        profile = Profile.objects.get(user_id=user.id)
-    except Profile.DoesNotExist:
-        raise Http404("个人信息不存在!")
+    # try:
+    #     profile = Profile.objects.get(user_id=user.id)
+    # except Profile.DoesNotExist:
+    #     raise Http404("个人信息不存在!")
 
     context = {
         "user": user,
