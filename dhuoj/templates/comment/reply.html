@@ -6,24 +6,36 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}"> -->
+    <!-- 新 Bootstrap5 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+    <!--  popper.min.js 用于弹窗、提示、下拉菜单 -->
+    <script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>
+    <!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+
+
+    <script src="{% static 'jquery/jquery-3.5.1.js' %}"></script>
+    <script src="{% static 'layer/layer.js' %}"></script>
 </head>
 
 <body>
-    <form action="." method="POST" id="reply_form">
-        {% csrf_token %}
-        <div class="form-group">
-            <div id="test">
-                {{ comment_form.media }}
-                {{ comment_form.body }}
+    <div>
+        <form action="." method="POST" id="reply_form">
+            {% csrf_token %}
+            <div class="form-group">
+                <div id="test">
+                    {{ comment_form.media }}
+                    {{ comment_form.body }}
+                </div>
             </div>
-        </div>
-    </form>
-    <!-- 提交按钮 -->
-    <button onclick="confirm_submit({{ article_id }}, {{ parent_comment_id }})" class="btn btn-primary">发送</button>
+        </form>
+        <!-- 提交按钮 -->
+        <button onclick="confirm_submit({{ article_id }}, {{ parent_comment_id }})" class="btn btn-primary">发送</button>
+    </div>
 
     <!-- csrf token -->
-    <script src="{% static 'csrf.js' %}"></script>
+    <!-- <script src="{% static 'csrf.js' %}"></script> -->
 
     <script>
         $(function () {
