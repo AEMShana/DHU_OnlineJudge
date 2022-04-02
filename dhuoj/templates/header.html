@@ -29,16 +29,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'home:home' %}">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'home:home' %}">首页</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Problem Set
+                        题目集
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{% url 'problemset:problemlist' %}">Problems</a></li>
-                        <li><a class="dropdown-item" href="#">Submit Problem</a></li>
+                        <li><a class="dropdown-item" href="{% url 'problemset:problemlist' %}">题目列表</a></li>
+                        <li><a class="dropdown-item" href="#">提交</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -52,13 +52,16 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contests</a>
+                    <a class="nav-link" href="#">比赛</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'blog:article_list' %}">Blogs</a>
+                    <a class="nav-link" href="{% url 'blog:article_list' %}">博客</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Information</a>
+                    <a class="nav-link" href="#">团队</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">新闻</a>
                 </li>
 
             </ul>
