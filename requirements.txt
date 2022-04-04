@@ -1,0 +1,7 @@
+django==3.1
+bs4
+lxml
+pymdown-extensions
+Pillow
+django-ckeditor
+django-mptt

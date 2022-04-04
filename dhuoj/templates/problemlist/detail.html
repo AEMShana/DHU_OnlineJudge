@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="container-fluid col-md-8 col-sm-10">
+        <!-- 标题 -->
+        <h1 class="col-12 mt-4 mb-4">{{ name }}</h1>
+        <!-- urls -->
+        {% for problem in problems %}
+        <li class="list-group-item col-md-6 col-sm-6">
+            <a href="{% url 'problemset:problem' problem %}">
+                {{ problem }}
+            </a>
+        </li>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
