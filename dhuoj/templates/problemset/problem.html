@@ -20,9 +20,10 @@
         <h2>Output</h2>
         <p>{{ problem_detail.problem_output|safe }}</p>
         <h2>Examples</h2>
-        {% for example in example_list %}
         <div class="card bg-light">
-            <div class="card-body pt-2 pb-2 ">
+            <p>{{problem_detail.example_list|safe}}</p>
+
+            <!-- <div class="card-body pt-2 pb-2 ">
                 <h5 class="card-title ">input</h5>
                 <hr>
                 <p class="card-text">
@@ -35,9 +36,8 @@
                 <p class="card-text">
                     {{example.output_example|safe}}
                 </p>
-            </div>
+            </div> -->
         </div>
-        {% endfor %}
         <h2>Source</h2>
         <p>{{problem_detail.problem_source|safe}}</p>
         <h2>Solution</h2>

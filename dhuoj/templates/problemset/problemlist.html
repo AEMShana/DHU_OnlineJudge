@@ -16,13 +16,13 @@
             <li class="list-group-item col-md-2 col-sm-2">
                 ID
             </li>
-            <li class="list-group-item col-md-6 col-sm-6">
+            <li class="list-group-item col-md-7 col-sm-7">
                 标题
             </li>
-            <li class="list-group-item col-md-3 col-sm-3">
+            <!-- <li class="list-group-item col-md-3 col-sm-3">
                 标签
-            </li>
-            <li class="list-group-item col-md-1 col-sm-1">
+            </li> -->
+            <li class="list-group-item col-md-3 col-sm-3">
                 难度
             </li>
         </ul>
@@ -35,13 +35,13 @@
                     {{problem.problemID}}
                 </a>
             </li>
-            <li class="list-group-item col-md-6 col-sm-6">
+            <li class="list-group-item col-md-7 col-sm-7">
                 <a href="{% url 'problemset:problem' problem.problemID %}"
                     style="text-decoration: none;color: black;font-size: medium;">
                     {{problem.title}}</a>
             </li>
-            <li class="list-group-item col-md-3 col-sm-3">A third item</li>
-            <li class="list-group-item col-md-1 col-sm-1">
+            <!-- <li class="list-group-item col-md-3 col-sm-3">A third item</li> -->
+            <li class="list-group-item col-md-3 col-sm-3">
                 <div class="fw-bold">{{problem.difficulty}}</div>
             </li>
         </ul>

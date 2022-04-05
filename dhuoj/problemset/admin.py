@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import Problem, ProblemExample
+from .models import Problem
 
 admin.site.register(Problem)
-admin.site.register(ProblemExample)

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
-from .models import Problem, ProblemExample
+from .models import Problem
 import markdown
 
 
@@ -19,7 +19,7 @@ def problemlist(request):
     problem_info = []
     for problem in problems:
         problem_info.append({'problemID': problem.problemID, 'title': problem.title,
-                            'difficulty': problem.problem_difficulty})
+                             'difficulty': problem.problem_difficulty})
 
     context = {'problem_info': problem_info}
     return render(request, 'problemset/problemlist.html', context)
@@ -30,16 +30,8 @@ def problem(request, problem_id):
         problem_detail = Problem.objects.get(problemID=problem_id)
     except Problem.DoesNotExist:
         raise Http404('题目不存在！')
-    try:
-        example_list = ProblemExample.objects.filter(problem=problem_detail)
-    except ProblemExample.DoesNotExist:
-        raise Http404('题目不存在！')
 
-    for example in example_list:
-        example.input_example = render_markdown(
-            "```\n" + example.input_example + "\n```")
-        example.output_example = render_markdown(
-            "```\n" + example.output_example + "\n```")
+    problem_detail.example_list = render_markdown(problem_detail.example_list)
 
     problem_detail.problem_description = render_markdown(
         problem_detail.problem_description)
@@ -61,6 +53,5 @@ def problem(request, problem_id):
 
     context = {
         'problem_detail': problem_detail,
-        'example_list': example_list,
     }
     return render(request, 'problemset/problem.html', context)
