@@ -5,17 +5,54 @@
 <div class="row">
     <div class="container-fluid col-md-8 col-sm-10">
         <!-- 队名 -->
-        <h1>团队: {{ name }}</h1>
-        <!-- 题单 -->
-        <h2>题单</h2>
-        {% for ql in questionlist %}
-            <div>{{ ql }}</div>
-        {% endfor %}
-        <!-- 成员 -->
-        <h2>成员</h2>
-        {% for member in members %}
-            <div>{{ member }}</div>
-        {% endfor %}
+        <div class="alert alert-primary pt-2 pb-2" role="alert">
+            <h3>{{ name }}</h3>
+        </div>
+
+        <div class="card col-12">
+            <div class="card-body">
+                <h5 class="card-title">题单</h5>
+                <ul class="list-group list-group-horizontal">
+                    {% for problemlist in problemlists %}
+                    <li class="list-group-item col-md-12 col-sm-12">
+                        <a href="{% url 'problemlist:detail' problemlist.listID %}"
+                            style="text-decoration: none; color: gray;">
+                            {{problemlist.listName }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="card col-12">
+            <div class="card-body">
+                <h5 class="card-title">成员</h5>
+                {% for member in members %}
+                <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item col-4">
+                        <a class="fw-bold" style="color:rgb(117, 114, 114); text-decoration: none;"
+                            href="{% url 'userprofile:profile' member.id %}">
+                            {{ member.name }}
+                        </a>
+                    </li>
+                    <li class="list-group-item col-4">
+                        <a class="fw-bold" style="color:rgb(117, 114, 114); text-decoration: none;"
+                            href="{% url 'userprofile:profile' member.id %}">
+                            {{ member.profile.realName }}
+                        </a>
+                    </li>
+                    <li class="list-group-item col-4">
+                        <a class="fw-bold" style="color:rgb(117, 114, 114); text-decoration: none;"
+                            href="{% url 'userprofile:profile' member.id %}">
+                            {{ member.profile.major }}
+                        </a>
+                    </li>
+
+                </ul>
+                {% endfor %}
+            </div>
+        </div>
+
     </div>
 </div>
 

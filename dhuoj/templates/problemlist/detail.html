@@ -4,14 +4,26 @@
 <div class="row">
     <div class="container-fluid col-md-8 col-sm-10">
         <!-- 标题 -->
-        <h1 class="col-12 mt-4 mb-4">{{ name }}</h1>
+        <div class="alert alert-primary pt-1 pb-1" role="alert">
+            <h3>{{ name }}</h3>
+        </div>
         <!-- urls -->
+
         {% for problem in problems %}
-        <li class="list-group-item col-md-6 col-sm-6">
-            <a href="{% url 'problemset:problem' problem %}">
-                {{ problem }}
-            </a>
-        </li>
+        <ul class="list-group list-group-horizontal">
+            <li class="list-group-item col-md-3 col-sm-3">
+                <a href="{% url 'problemset:problem' problem.problemID %}"
+                    style="text-decoration: none;color: black;font-size: medium;">
+                    {{ problem.problemID }}
+                </a>
+            </li>
+            <li class="list-group-item col-md-9 col-sm-9">
+                <a href="{% url 'problemset:problem' problem.problemID %}"
+                    style="text-decoration: none;color: black;font-size: medium;">
+                    {{ problem.problemTitle }}
+                </a>
+            </li>
+        </ul>
         {% endfor %}
     </div>
 </div>

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+<div class="row">
+    <div class="container-fluid col-md-8 col-sm-10">
+        <br>
+        <h1>团队列表</h1>
+        <hr>
+
+
+        <ul class="list-group list-group-horizontal">
+            <li class="list-group-item col-md-6 col-sm-6" style="color:rgb(88, 104, 247); font-weight: 600;">
+                团队名称
+            </li>
+            <li class="list-group-item col-md-3 col-sm-3" style="color:rgb(88, 104, 247); font-weight: 600;">
+                团队人数
+            </li>
+            <!-- <li class="list-group-item col-md-3 col-sm-3" >
+                标签
+            </li> -->
+            <li class="list-group-item col-md-3 col-sm-3" style="color:rgb(88, 104, 247); font-weight: 600;">
+                题单数
+            </li>
+        </ul>
+
+        {% for team in teams %}
+        <ul class="list-group list-group-horizontal">
+            <li class="list-group-item col-md-6 col-sm-6">
+                <a href="{% url 'team:detail' team.id %}" style="text-decoration: none;color: black;font-size:medium;">
+                    {{team.name}}
+                </a>
+            </li>
+            <li class="list-group-item col-md-3 col-sm-3">
+                <a href="{% url 'team:detail' team.id %}" style="text-decoration: none;color: black;font-size: medium;">
+                    {{team.user_number}}
+                </a>
+            </li>
+            <!-- <li class="list-group-item col-md-3 col-sm-3">A third item</li> -->
+            <li class="list-group-item col-md-3 col-sm-3">
+                <div class="fw-bold"></div>
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
