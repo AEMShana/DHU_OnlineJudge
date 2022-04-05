@@ -26,6 +26,7 @@ urlpatterns = [
     path('problemset/', include('problemset.urls', namespace='problemset')),
     path('comment/', include('comment.urls', namespace='comment')),
     path('problemlist/', include('problemlist.urls', namespace='problemlist')),
+    path('team/', include('team.urls', namespace='team')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
