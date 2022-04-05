@@ -39,9 +39,10 @@
         </div>
         {% endfor %}
         <h2>Source</h2>
-        <p>{{problem_detail.problem_source|safe}}</p>
+        <p>{{ problem_detail.problem_source|safe }}</p>
         <h2>Solution</h2>
-        <a href="{% url 'blog:article_list' %}" class="btn btn-primary">查看题解</a>
+        <!-- xxx为文章标签 -->
+        <a href="{% url 'blog:article_search' xxxxxx%}" class="btn btn-primary">查看题解</a>
     </div>
 </div>
 

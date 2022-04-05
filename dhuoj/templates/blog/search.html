@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+<style type="text/css">
+    a {
+        text-decoration: none
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                <div class="card-header py-3 text-white bg-primary border-primary">
+                    <h4 class="my-0 fw-normal">Blog</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li>
+                            <a href="{% url 'blog:article_create' %}" class="nav-link bg-primary text-white">
+                                <svg class="bi pe-none me-2" width="16" height="16">
+                                </svg>
+                                发布新文章
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link link-dark">
+                                <svg class="bi pe-none me-2" width="16" height="16">
+                                    <use xlink:href="#speedometer2"></use>
+                                </svg>
+                                All
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link link-dark">
+                                <svg class="bi pe-none me-2" width="16" height="16">
+                                    <use xlink:href="#speedometer2"></use>
+                                </svg>
+                                Self
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link link-dark">
+                                <svg class="bi pe-none me-2" width="16" height="16">
+                                    <use xlink:href="#table"></use>
+                                </svg>
+                                Top rated
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-9">
+            <form class="form-inline">
+                <input type="text" class="form-control mb-2 mr-sm-2" name="search" placeholder="搜索文章..." required>
+            </form>
+            {% if articles %}
+            <p><span style="color: red">"{{ search }}"</span>的搜索结果如下：</p>
+            <ul class="list-group">
+                {% for article in articles %}
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <!-- 标签 -->
+                    {% if article.column %}
+                    <button type="button" class="btn btn-sm mb-2" style="color: white;background-color: black">
+                        {{ article.column }}
+                    </button>
+                    {% endif %}
+
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">
+                            <a href="{% url 'blog:article_detail' article.id %}">
+                                {{ article.title}}
+                            </a>
+                            <!-- 显示浏览量 -->
+                            <span>
+                                <small class="col align-self-end" style="color: gray;">
+                                    浏览: {{ article.total_views }}
+                                </small>
+                            </span>
+                        </div>
+                        {{ article.body|slice:'150' }}
+                    </div>
+                    <span class="badge bg-primary rounded-pill">{{article.created|date:"Y/m/d"}}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>暂无与<span style="color: red">"{{ search }}"</span>有关的文章。</p>
+            {% endif %}
+
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

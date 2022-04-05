@@ -15,9 +15,9 @@ class Profile(models.Model):
     # 个人简介
     bio = models.TextField(max_length=500, blank=True)
     # 邮箱
-    email = models.TextField(max_length=50, blank=False)
+    email = models.TextField(max_length=50, blank=True)
     # 专业班级
-    major = models.TextField(max_length=50, blank=False)
+    major = models.TextField(max_length=50, blank=True)
 
     def __str__(self):
         return 'user {}'.format(self.user.username)
