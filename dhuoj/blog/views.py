@@ -26,11 +26,14 @@ def article_list(request):
     context = {'articles': articles, 'search': search}
     return render(request, 'blog/list.html', context)
 
-
 def article_search(request, id):
-    articles = ArticlePost.objects.filter(ArticlePost__column__id=id)
-    context = {'articles': articles}
-    return render(request, 'blog/search.html', context)
+    articles = ArticlePost.objects.filter(
+        Q(title__icontains=id) |
+        Q(body__icontains=id) |
+        Q(column__title__icontains=id)
+    )
+    context = { 'articles': articles, 'search': id }
+    return render(request, 'blog/list.html', context)
 
 
 def article_detail(request, id):

@@ -10,5 +10,5 @@ urlpatterns = [
          views.article_safe_delete, name='article_safe_delete'),
     path('article-update/<int:id>/',
          views.article_update, name='article_update'),
-    path('article-search/<int:id>/', views.article_search, name='article_search'),
+     path('article-search/<id>', views.article_search, name='article_search'),
 ]
