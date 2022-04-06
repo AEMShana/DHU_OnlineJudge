@@ -1,6 +1,8 @@
+import imp
 from django.shortcuts import render, redirect
 from django.http import Http404
 from .models import Problem
+from judgestatus.models import JudgeStatus
 import markdown
 
 
@@ -15,12 +17,35 @@ def render_markdown(text):
 
 
 def problemlist(request):
-    problems = Problem.objects.all()[:20]
+    problems = Problem.objects.all()
     problem_info = []
-    for problem in problems:
-        problem_info.append({'problemID': problem.problemID, 'title': problem.title,
-                             'difficulty': problem.problem_difficulty})
 
+    if request.user.username:
+        for problem in problems:
+            verdict = ''
+            status = JudgeStatus.objects.filter(
+                author=request.user, problemID=problem.problemID)
+            for statu in status:
+                if statu.verdict == 'Accepted':
+                    verdict = 'AC'
+                    break
+
+            problem_info.append({
+                'problemID': problem.problemID,
+                'title': problem.title,
+                'difficulty': problem.problem_difficulty,
+                'verdict': verdict
+            })
+    else:
+        for problem in problems:
+            verdict = ''
+
+            problem_info.append({
+                'problemID': problem.problemID,
+                'title': problem.title,
+                'difficulty': problem.problem_difficulty,
+                'verdict': verdict
+            })
     context = {'problem_info': problem_info}
     return render(request, 'problemset/problemlist.html', context)
 

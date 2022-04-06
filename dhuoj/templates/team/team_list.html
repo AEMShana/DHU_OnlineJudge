@@ -13,42 +13,42 @@
 
         <a href="#" class="btn btn-primary">新建团队</a>
 
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">团队名称</th>
+                    <th scope="col">团队人数</th>
+                    <th scope="col">题单数</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for team in teams %}
+                <tr>
+                    <td>
+                        <a href="{% url 'team:detail' team.id %}"
+                            style="text-decoration: none;color: black;font-size:medium;">
+                            {{team.name}}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'team:detail' team.id %}"
+                            style="text-decoration: none;color: black;font-size: medium;">
+                            {{team.user_number}}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'team:detail' team.id %}"
+                            style="text-decoration: none;color: black;font-size: medium;">
+                            {{team.problemlist_number}}
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
 
-        <ul class="list-group list-group-horizontal">
-            <li class="list-group-item col-md-6 col-sm-6" style="color:rgb(88, 104, 247); font-weight: 600;">
-                团队名称
-            </li>
-            <li class="list-group-item col-md-3 col-sm-3" style="color:rgb(88, 104, 247); font-weight: 600;">
-                团队人数
-            </li>
-            <!-- <li class="list-group-item col-md-3 col-sm-3" >
-                标签
-            </li> -->
-            <li class="list-group-item col-md-3 col-sm-3" style="color:rgb(88, 104, 247); font-weight: 600;">
-                题单数
-            </li>
-        </ul>
 
-        {% for team in teams %}
-        <ul class="list-group list-group-horizontal">
-            <li class="list-group-item col-md-6 col-sm-6">
-                <a href="{% url 'team:detail' team.id %}" style="text-decoration: none;color: black;font-size:medium;">
-                    {{team.name}}
-                </a>
-            </li>
-            <li class="list-group-item col-md-3 col-sm-3">
-                <a href="{% url 'team:detail' team.id %}" style="text-decoration: none;color: black;font-size: medium;">
-                    {{team.user_number}}
-                </a>
-            </li>
-            <li class="list-group-item col-md-3 col-sm-3">
-                <a href="{% url 'team:detail' team.id %}" style="text-decoration: none;color: black;font-size: medium;">
-                    {{team.problemlist_number}}
-                </a>
-            </li>
-        </ul>
-        {% endfor %}
     </div>
 </div>
 

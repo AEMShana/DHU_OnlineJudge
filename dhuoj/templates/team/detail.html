@@ -35,20 +35,32 @@
                                     <a href="" class="btn btn-primary">新建</a>
                                 </h5>
 
-                                {% for problemlist in problemlists %}
-                                <ul class="list-group list-group-horizontal">
-                                    <li class="list-group-item col-md-8 col-sm-8">
-                                        <a href="{% url 'problemlist:detail' problemlist.listID %}"
-                                            style="text-decoration: none; color: black;">
-                                            {{problemlist.listName }}</a>
-                                    </li>
-                                    <li class="list-group-item col-md-4 col-sm-4">
-                                        <a href="{% url 'problemlist:detail' problemlist.listID %}"
-                                            style="text-decoration: none; color: black">
-                                            共{{problemlist.problemNumber }}题</a>
-                                    </li>
-                                </ul>
-                                {% endfor %}
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">题单名称</th>
+                                            <th scope="col">题数</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for problemlist in problemlists %}
+                                        <tr>
+                                            <td>
+                                                <a href="{% url 'problemlist:detail' problemlist.listID %}"
+                                                    style="text-decoration: none; color: black;">
+                                                    {{problemlist.listName }}</a>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'problemlist:detail' problemlist.listID %}"
+                                                    style="text-decoration: none; color: black">
+                                                    共{{problemlist.problemNumber }}题</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+
+
                             </div>
                         </div>
 
@@ -58,29 +70,46 @@
                                     <a href="" class="btn btn-primary">导入</a>
 
                                 </h5>
-                                {% for member in members %}
-                                <ul class="list-group list-group-horizontal">
-                                    <li class="list-group-item col-4">
-                                        <a class="fw-bold" style="color:rgb(117, 114, 114); text-decoration: none;"
-                                            href="{% url 'userprofile:profile' member.id %}">
-                                            {{ member.name }}
-                                        </a>
-                                    </li>
-                                    <li class="list-group-item col-4">
-                                        <a class="fw-bold" style="color:rgb(117, 114, 114); text-decoration: none;"
-                                            href="{% url 'userprofile:profile' member.id %}">
-                                            {{ member.profile.realName }}
-                                        </a>
-                                    </li>
-                                    <li class="list-group-item col-4">
-                                        <a class="fw-bold" style="color:rgb(117, 114, 114); text-decoration: none;"
-                                            href="{% url 'userprofile:profile' member.id %}">
-                                            {{ member.profile.major }}
-                                        </a>
-                                    </li>
 
-                                </ul>
-                                {% endfor %}
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">用户名</th>
+                                            <th scope="col">真实姓名</th>
+                                            <th scope="col">专业班级</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for member in members %}
+                                        <tr>
+                                            <td>
+                                                <a class="fw-bold"
+                                                    style="color:rgb(117, 114, 114); text-decoration: none;"
+                                                    href="{% url 'userprofile:profile' member.id %}">
+                                                    {{ member.name }}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="fw-bold"
+                                                    style="color:rgb(117, 114, 114); text-decoration: none;"
+                                                    href="{% url 'userprofile:profile' member.id %}">
+                                                    {{ member.profile.realName }}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="fw-bold"
+                                                    style="color:rgb(117, 114, 114); text-decoration: none;"
+                                                    href="{% url 'userprofile:profile' member.id %}">
+                                                    {{ member.profile.major }}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+
+
+
                             </div>
                         </div>
 

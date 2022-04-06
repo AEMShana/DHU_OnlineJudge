@@ -11,41 +11,40 @@
         <h1>题目列表</h1>
         <hr>
 
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">标题</th>
+                    <th scope="col">状态</th>
+                    <th scope="col">难度</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for problem in problem_info %}
+                <tr>
+                    <th scope="row">
+                        <a href="{% url 'problemset:problem' problem.problemID %}"
+                            style="text-decoration: none;color: black;font-size:medium;">
+                            {{problem.problemID}}
+                        </a>
+                    </th>
+                    <td>
+                        <a href="{% url 'problemset:problem' problem.problemID %}"
+                            style="text-decoration: none;color: black;font-size: medium;">
+                            {{problem.title}}</a>
+                    </td>
+                    <td>
+                        <div class="fw-bold">{{problem.difficulty}}</div>
+                    </td>
+                    <td>
+                        <div class="fw-bold">{{problem.verdict}}</div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-        <ul class="list-group list-group-horizontal">
-            <li class="list-group-item col-md-2 col-sm-2" style="color:rgb(88, 104, 247); font-weight: 600;">
-                ID
-            </li>
-            <li class="list-group-item col-md-7 col-sm-7" style="color:rgb(88, 104, 247); font-weight: 600;">
-                标题
-            </li>
-            <!-- <li class="list-group-item col-md-3 col-sm-3">
-                标签
-            </li> -->
-            <li class="list-group-item col-md-3 col-sm-3" style="color:rgb(88, 104, 247); font-weight: 600;">
-                难度
-            </li>
-        </ul>
-
-        {% for problem in problem_info %}
-        <ul class="list-group list-group-horizontal">
-            <li class="list-group-item col-md-2 col-sm-2">
-                <a href="{% url 'problemset:problem' problem.problemID %}"
-                    style="text-decoration: none;color: black;font-size:medium;">
-                    {{problem.problemID}}
-                </a>
-            </li>
-            <li class="list-group-item col-md-7 col-sm-7">
-                <a href="{% url 'problemset:problem' problem.problemID %}"
-                    style="text-decoration: none;color: black;font-size: medium;">
-                    {{problem.title}}</a>
-            </li>
-            <!-- <li class="list-group-item col-md-3 col-sm-3">A third item</li> -->
-            <li class="list-group-item col-md-3 col-sm-3">
-                <div class="fw-bold">{{problem.difficulty}}</div>
-            </li>
-        </ul>
-        {% endfor %}
     </div>
 </div>
 

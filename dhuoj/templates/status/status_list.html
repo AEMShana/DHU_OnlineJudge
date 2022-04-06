@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row" style="background-color: rgb(239, 239, 239);">
+    <div class="container-fluid col-md-10 col-sm-10" style="background-color: white;">
+        <br>
+        <h1>提交状态</h1>
+        <hr>
+        {% if user.is_authenticated %}
+        <a href="{% url 'judgestatus:status_list' user.username %}" class="btn btn-primary">我的提交</a>
+        <br>
+        {% endif %}
+
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">编号</th>
+                    <th scope="col">提交时间</th>
+                    <th scope="col">用户</th>
+                    <th scope="col">题目</th>
+                    <th scope="col">语言</th>
+                    <th scope="col">状态</th>
+                    <th scope="col">用时</th>
+                    <th scope="col">内存</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for statu in status_list %}
+                <tr>
+                    <td>
+                        <a href="#" style="text-decoration: none;color: black;font-size:medium;">
+                            {{statu.status_id}}
+                        </a>
+                    </td>
+                    <td>
+                        <p href="#" style="text-decoration: none;color: black;font-size:medium;">
+                            {{statu.submit_time}}
+                        </p>
+                    </td>
+                    <td>
+                        <a href="#" style="text-decoration: none;color: blue;font-size:medium;">
+                            {{statu.user_name}}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" style="text-decoration: none;color: blue;font-size:medium;">
+                            {{statu.problem}}
+                        </a>
+                    </td>
+                    <td>
+                        <p style="text-decoration: none;color: black;font-size:medium;">
+                            {{statu.programmingLanguage}}
+                        </p>
+                    </td>
+                    <td>
+                        <a href="#" style="text-decoration: none;color: black;font-size:medium;">
+                            {{statu.verdict}}
+                        </a>
+                    </td>
+                    <td>
+                        <p style="text-decoration: none;color: black;font-size:medium;">
+                            {{statu.timeConsumedMillis}}
+                        </p>
+                    </td>
+                    <td>
+                        <a href="#" style="text-decoration: none;color: black;font-size:medium;">
+                            {{statu.memoryConsumedBytes}}
+                        </a>
+                    </td>
+                </tr>
+
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}
