@@ -15,7 +15,7 @@ def render_markdown(text):
 
 
 def problemlist(request):
-    problems = Problem.objects.all()[:50]
+    problems = Problem.objects.all()[:20]
     problem_info = []
     for problem in problems:
         problem_info.append({'problemID': problem.problemID, 'title': problem.title,

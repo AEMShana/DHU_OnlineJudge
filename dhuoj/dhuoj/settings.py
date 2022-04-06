@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'comment',
     'problemlist',
     'team',
+    'judgestatus',
 ]
 
 MIDDLEWARE = [

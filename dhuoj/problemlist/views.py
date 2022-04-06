@@ -13,4 +13,5 @@ def problemlist_detail(request, id):
 
     context = {"name": prolist.listName,
                "problems": problems}
+    print(problems)
     return render(request, 'problemlist/detail.html', context)

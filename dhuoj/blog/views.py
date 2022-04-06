@@ -21,19 +21,21 @@ def article_list(request):
             Q(column__title__icontains=search)
         )
     else:
-        search =''
+        search = ''
         articles = ArticlePost.objects.all()
-    context = { 'articles': articles, 'search': search }
+    context = {'articles': articles, 'search': search}
     return render(request, 'blog/list.html', context)
+
 
 def article_search(request, id):
     articles = ArticlePost.objects.filter(ArticlePost__column__id=id)
     context = {'articles': articles}
     return render(request, 'blog/search.html', context)
 
+
 def article_detail(request, id):
     article = ArticlePost.objects.get(id=id)
-     # 取出文章评论
+    # 取出文章评论
     comments = Comment.objects.filter(article=id)
     article.total_views += 1
     article.save(update_fields=['total_views'])
@@ -46,9 +48,9 @@ def article_detail(request, id):
                                      )
     comment_form = CommentForm()
     context = {'article': article,
-        'comments': comments, 
-        'comment_form': comment_form,
-    }
+               'comments': comments,
+               'comment_form': comment_form,
+               }
     return render(request, 'blog/detail.html', context)
 
 # 写文章的视图
@@ -110,7 +112,7 @@ def article_update(request, id):
             else:
                 article.column = None
             article.save()
-            # 完成后返回到修改后的文章中。需传入文章 id 
+            # 完成后返回到修改后的文章中。需传入文章 id
             return redirect("blog:article_detail", id=id)
         # 如果数据不合法，返回错误信息
         else:

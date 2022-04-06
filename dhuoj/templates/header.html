@@ -52,8 +52,12 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">比赛</a>
+                    <a class="nav-link" aria-current="page"
+                        href="{% url 'judgestatus:status_list' user.username %}">状态</a>
                 </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#">比赛</a>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'blog:article_list' %}">博客</a>
                 </li>

@@ -5,11 +5,14 @@
 {% block content %}
 
 
-<div class="row">
-    <div class="container-fluid col-md-8 col-sm-10">
+<div class="row" style="background-color: rgb(239, 239, 239);">
+    <div class="container-fluid col-md-8 col-sm-10" style="background-color: white;">
         <br>
         <h1>团队列表</h1>
         <hr>
+
+        <a href="#" class="btn btn-primary">新建团队</a>
+
 
 
         <ul class="list-group list-group-horizontal">
@@ -39,9 +42,10 @@
                     {{team.user_number}}
                 </a>
             </li>
-            <!-- <li class="list-group-item col-md-3 col-sm-3">A third item</li> -->
             <li class="list-group-item col-md-3 col-sm-3">
-                <div class="fw-bold"></div>
+                <a href="{% url 'team:detail' team.id %}" style="text-decoration: none;color: black;font-size: medium;">
+                    {{team.problemlist_number}}
+                </a>
             </li>
         </ul>
         {% endfor %}

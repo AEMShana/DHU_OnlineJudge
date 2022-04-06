@@ -1,59 +1,97 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 
-<div class="row">
-    <div class="container-fluid col-md-8 col-sm-10">
-        <!-- 队名 -->
-        <div class="alert alert-primary pt-2 pb-2" role="alert">
-            <h3>{{ name }}</h3>
-        </div>
+<div class="row" style="background-color: rgb(239, 239, 239);">
+    <div class="container-fluid col-md-10" style="background-color: white;">
+        <br>
+        <div class="row">
+            <div class="col-3">
+                <div class="card">
+                    <img src="{% static 'images/dhuicon.png' %}" class="card-img"
+                        style="max-width: 100%; border-radius: 100%;">
+                    <div class="card-body">
+                        <div class="card-title"><strong style="font-size:xx-large;">{{name}}</strong></div>
+                        <div class="card-subtitle  mb-2 text-muted">
+                            题单数: {{problemlists|length}}
+                        </div>
+                        <div class="card-subtitle  mb-2 text-muted">
+                            成员数: {{members|length}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="row">
+                    <div class="container-fluid">
+                        <!-- 队名 -->
+                        <div class="alert alert-primary pt-2 pb-2" role="alert">
+                            <h3>{{ name }}</h3>
+                        </div>
 
-        <div class="card col-12">
-            <div class="card-body">
-                <h5 class="card-title">题单</h5>
-                <ul class="list-group list-group-horizontal">
-                    {% for problemlist in problemlists %}
-                    <li class="list-group-item col-md-12 col-sm-12">
-                        <a href="{% url 'problemlist:detail' problemlist.listID %}"
-                            style="text-decoration: none; color: gray;">
-                            {{problemlist.listName }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
+                        <div class="card col-12">
+                            <div class="card-body">
+                                <h5 class="card-title">题单
+                                    <a href="" class="btn btn-primary">新建</a>
+                                </h5>
+
+                                {% for problemlist in problemlists %}
+                                <ul class="list-group list-group-horizontal">
+                                    <li class="list-group-item col-md-8 col-sm-8">
+                                        <a href="{% url 'problemlist:detail' problemlist.listID %}"
+                                            style="text-decoration: none; color: black;">
+                                            {{problemlist.listName }}</a>
+                                    </li>
+                                    <li class="list-group-item col-md-4 col-sm-4">
+                                        <a href="{% url 'problemlist:detail' problemlist.listID %}"
+                                            style="text-decoration: none; color: black">
+                                            共{{problemlist.problemNumber }}题</a>
+                                    </li>
+                                </ul>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="card col-12">
+                            <div class="card-body">
+                                <h5 class="card-title">成员
+                                    <a href="" class="btn btn-primary">导入</a>
+
+                                </h5>
+                                {% for member in members %}
+                                <ul class="list-group list-group-horizontal">
+                                    <li class="list-group-item col-4">
+                                        <a class="fw-bold" style="color:rgb(117, 114, 114); text-decoration: none;"
+                                            href="{% url 'userprofile:profile' member.id %}">
+                                            {{ member.name }}
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item col-4">
+                                        <a class="fw-bold" style="color:rgb(117, 114, 114); text-decoration: none;"
+                                            href="{% url 'userprofile:profile' member.id %}">
+                                            {{ member.profile.realName }}
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item col-4">
+                                        <a class="fw-bold" style="color:rgb(117, 114, 114); text-decoration: none;"
+                                            href="{% url 'userprofile:profile' member.id %}">
+                                            {{ member.profile.major }}
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </div>
-
-        <div class="card col-12">
-            <div class="card-body">
-                <h5 class="card-title">成员</h5>
-                {% for member in members %}
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item col-4">
-                        <a class="fw-bold" style="color:rgb(117, 114, 114); text-decoration: none;"
-                            href="{% url 'userprofile:profile' member.id %}">
-                            {{ member.name }}
-                        </a>
-                    </li>
-                    <li class="list-group-item col-4">
-                        <a class="fw-bold" style="color:rgb(117, 114, 114); text-decoration: none;"
-                            href="{% url 'userprofile:profile' member.id %}">
-                            {{ member.profile.realName }}
-                        </a>
-                    </li>
-                    <li class="list-group-item col-4">
-                        <a class="fw-bold" style="color:rgb(117, 114, 114); text-decoration: none;"
-                            href="{% url 'userprofile:profile' member.id %}">
-                            {{ member.profile.major }}
-                        </a>
-                    </li>
-
-                </ul>
-                {% endfor %}
-            </div>
-        </div>
-
     </div>
 </div>
+
+
 
 {% endblock content %}
