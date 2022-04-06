@@ -32,7 +32,9 @@
                         <div class="card col-12">
                             <div class="card-body">
                                 <h5 class="card-title">题单
-                                    <a href="" class="btn btn-primary">新建</a>
+                                    {% if user.name == admin %}
+                                    <a href="{% url 'problemlist:create' teamID %}" class="btn btn-primary">新建</a>
+                                    {% endif %}
                                 </h5>
 
                                 <table class="table table-striped">

@@ -41,7 +41,8 @@
         <h2>Source</h2>
         <p>{{ problem_detail.problem_source|safe }}</p>
         <a href="" class="btn btn-primary">提交代码</a>
-        <a href="{% url 'blog:article_search' problem_detail.id %}" class="btn btn-primary">查看题解</a>
+        <a href="{% url 'blog:article_search' problem_detail.problemID %}" class="btn btn-primary">查看题解</a>
+        
 
     </div>
 </div>
