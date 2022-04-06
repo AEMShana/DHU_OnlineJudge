@@ -5,10 +5,11 @@
     <div class="container-fluid col-md-10" style="background-color: white;">
         <br>
         <div class="row">
-            <div class="col-5">
-                <div class="card" style="width: 18rem;">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <div class="card" style="width: 30rem;">
                     {% if profile.photo %}
-                    <img src="{{ profile.photo.url }}" class="card-img" style="max-width: 100%; border-radius: 100%;">
+                    <img src="{{ profile.photo.url }}" class="card-img" style="max-width: 50%; border-radius: 100%;">
                     {% else %}
                     <h5>暂无头像</h5>
                     {% endif %}
@@ -23,14 +24,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col-7">
+            <div class="col-3"></div>
+
+            <!-- <div class="col-7">
                 {% if profile.bio %}
                 {{ profile.bio }}
                 {% else %}
                 暂无简介
                 {% endif %}
 
-            </div>
+            </div> -->
         </div>
         <div class="container-fluid pt-2 pb-2">
             <img src="{% static 'images/hotmap.png' %}" width="100%" />
