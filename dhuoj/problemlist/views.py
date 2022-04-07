@@ -1,4 +1,3 @@
-from http.client import HTTPResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import ProblemList
@@ -6,7 +5,6 @@ from problemset.models import Problem
 from django.contrib.auth.decorators import login_required
 from .forms import ProblemListForm
 from team.models import Team
-from team.views import team_detail
 
 
 def problemlist_detail(request, id):

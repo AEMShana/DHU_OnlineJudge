@@ -34,6 +34,15 @@ def article_search(request, id):
     context = { 'articles': articles, 'search': id }
     return render(request, 'blog/list.html', context)
 
+def news_search(request):
+    search = '新闻'
+    articles = ArticlePost.objects.filter(
+        Q(title__icontains=search) |
+        Q(body__icontains=search) |
+        Q(column__title__icontains=search)
+    )
+    context = {'articles': articles, 'search': search}
+    return render(request, 'blog/list.html', context)
 
 def article_detail(request, id):
     article = ArticlePost.objects.get(id=id)
