@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>创建一个新团队</h1>
+            <hr>
+            <form method="post" action=".">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title">团队名称</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="body">成员</label>
+                    <textarea type="text" class="form-control" id="members" name="members" rows="12"></textarea>
+                </div>
+                <br>
+                <div style="text-align:center">
+                    <button type="submit" class="btn btn-lg btn-primary">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
