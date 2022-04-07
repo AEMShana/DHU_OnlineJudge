@@ -84,7 +84,7 @@
 
                 {% endfor %}
             </div>
-            {% load mptt_tags %}
+            <!-- {% load mptt_tags %}
             <h4>共有{{ comments.count }}条评论</h4>
             <div class="row">
                 {% recursetree comments %}
@@ -156,44 +156,44 @@
 </div>
 
 
-{% block script %}
+{% block script %} -->
 
-<script>
-    function confirm_safe_delete() {
-        layer.open({
-            title: "确认删除",
-            content: "确认删除这篇文章吗？",
-            yes: function (index, layero) {
-                $('form#safe_delete button').click();
-                layer.close(index);
-            },
-        })
-    }
-</script>
+            <script>
+                function confirm_safe_delete() {
+                    layer.open({
+                        title: "确认删除",
+                        content: "确认删除这篇文章吗？",
+                        yes: function (index, layero) {
+                            $('form#safe_delete button').click();
+                            layer.close(index);
+                        },
+                    })
+                }
+            </script>
 
-<!-- 新增代码，唤醒二级回复的 modal -->
-<script>
-    // 加载 modal
-    function load_modal(article_id, comment_id) {
-        let modal_body = '#modal_body_' + comment_id;
-        let modal_id = '#comment_' + comment_id;
+            <!-- 新增代码，唤醒二级回复的 modal -->
+            <script>
+                // 加载 modal
+                function load_modal(article_id, comment_id) {
+                    let modal_body = '#modal_body_' + comment_id;
+                    let modal_id = '#comment_' + comment_id;
 
-        // 加载编辑器
-        if ($(modal_body).children().length === 0) {
-            let content = '<iframe src="/comment/post-comment/' +
-                article_id +
-                '/' +
-                comment_id +
-                '"' +
-                ' frameborder="0" style="width: 100%; height: 100%;" id="iframe_' +
-                comment_id +
-                '"></iframe>';
-            $(modal_body).append(content);
-        };
+                    // 加载编辑器
+                    if ($(modal_body).children().length === 0) {
+                        let content = '<iframe src="/comment/post-comment/' +
+                            article_id +
+                            '/' +
+                            comment_id +
+                            '"' +
+                            ' frameborder="0" style="width: 100%; height: 100%;" id="iframe_' +
+                            comment_id +
+                            '"></iframe>';
+                        $(modal_body).append(content);
+                    };
 
-        $(modal_id).modal('show');
-    }
-</script>
-{% endblock script %}
+                    $(modal_id).modal('show');
+                }
+            </script>
+            {% endblock script %}
 
-{% endblock content %}
+            {% endblock content %}

@@ -40,9 +40,13 @@
         </div>
         <h2>Source</h2>
         <p>{{ problem_detail.problem_source|safe }}</p>
+
+        <div class="mb-3">
+            <label for="code" class="form-label">请输入C++代码:</label>
+            <textarea class="form-control" id="code" rows="10"></textarea>
+        </div>
         <a href="" class="btn btn-primary">提交代码</a>
         <a href="{% url 'blog:article_search' problem_detail.problemID %}" class="btn btn-primary">查看题解</a>
-        
 
     </div>
 </div>

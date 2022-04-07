@@ -21,18 +21,24 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card" style="width: fit-content; height:fit-content">
-                    <!-- <img src="..." class="card-img-top" alt="..."> -->
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                            of the
-                            card's
-                            content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                <ul class="list-group">
+                    <div class="alert alert-primary pt-2 pb-2" role="alert">
+                        新闻
                     </div>
-                </div>
+                    {% for problem in new_problem %}
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">
+                                <a href="{% url 'problemset:problem' problem.problemID %}">{{problem.title}}</a>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">{{problem.problemID}}</span>
+                            {{ problem.problem_description|slice:'80' }}
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
+
         </div>
     </div>
 </div>
