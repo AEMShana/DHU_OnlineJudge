@@ -25,14 +25,14 @@
                     <div class="alert alert-primary pt-2 pb-2" role="alert">
                         新闻
                     </div>
-                    {% for problem in new_problem %}
+                    {% for article in news %}
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold">
-                                <a href="{% url 'problemset:problem' problem.problemID %}">{{problem.title}}</a>
+                                <a href="{% url 'blog:article_detail' article.id %}">{{article.title}}</a>
                             </div>
-                            <span class="badge bg-primary rounded-pill">{{problem.problemID}}</span>
-                            {{ problem.problem_description|slice:'80' }}
+                            <span class="badge bg-primary rounded-pill">{{article.created|date:"Y/m/d"}}</span>
+                            {{ article.body|slice:'80' }}
                         </div>
                     </li>
                     {% endfor %}
